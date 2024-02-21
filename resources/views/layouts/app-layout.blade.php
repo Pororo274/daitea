@@ -16,14 +16,14 @@
                     <ul class="flex gap-4 items-center"
                     >
                         <li>
-                            <a href="">Главная</a>
+                            <a href="/">Главная</a>
                         </li>
                         <x-states.admin>
                             <li>
-                                <a href="">Добавить товар</a>
+                                <a href="/products/create">Добавить товар</a>
                             </li>
                             <li>
-                                <a href="">Добавить категорию</a>
+                                <a href="/categories/create">Добавить категорию</a>
                             </li>
                         </x-states.admin>
                     </ul>
@@ -34,7 +34,7 @@
                     @endauth
 
                     @guest
-                        <a href="/auth/login">Войти</a> 
+                        <a href="/auth/login">Войти</a>
                     @endguest
                 </div>
             </div>
