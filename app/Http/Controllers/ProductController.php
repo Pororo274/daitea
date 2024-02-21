@@ -29,7 +29,11 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('pages.products.create');
+        $categories = Category::query()->get();
+
+        return view('pages.products.create', [
+            'categories' => $categories
+        ]);
     }
 
     public function store(CreateProductRequest $request)
@@ -37,8 +41,10 @@ class ProductController extends Controller
         $imagePath = $request->file('image')->store('products');
 
         Product::query()->create([
-            ...$request->only(['name', 'price', 'description']),
+            ...$request->only(['name', 'price', 'description', 'category_id']),
             'image_path' => $imagePath
         ]);
+
+        return redirect()->route('product.index');
     }
 }

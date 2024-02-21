@@ -30,11 +30,18 @@
                 </nav>
                 <div>
                     @auth
-                        Добрый день, {{ auth()->user()->name }}
+                            <div class="flex gap-4">
+                                <p>
+                                    Добро пожаловать, {{ auth()->user()->name }}!
+                                </p>
+                                <x-customs.form action="/auth/exit">
+                                    <button class="text-red-500">Выйти</button>
+                                </x-customs.form>
+                        </div>
                     @endauth
 
                     @guest
-                        <a href="/auth/login">Войти</a>
+                            <a href="/auth/login">Войти</a>
                     @endguest
                 </div>
             </div>

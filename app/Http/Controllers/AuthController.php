@@ -38,4 +38,13 @@ class AuthController extends Controller
             'login' => 'Такой пользователь не найден'
         ]);
     }
+
+    public function exit()
+    {
+        auth()->logout();
+
+        session()->regenerate();
+
+        return redirect()->route('product.index');
+    }
 }

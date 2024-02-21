@@ -18,6 +18,7 @@ class CreateProductRequest extends FormRequest
             'name' => ['required'],
             'price' => ['required', 'numeric'],
             'image' => ['required', File::image()->max(5 * 1024)],
+            'category_id' => ['required', 'integer'],
             'description' => ['required', 'max:300']
         ];
     }
