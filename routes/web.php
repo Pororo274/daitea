@@ -15,24 +15,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(ProductController::class)->name('product.')->group(function () {
+Route::controller(ProductController::class)
+    ->name('product.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::prefix('products')->group(function () {
+
+    Route::prefix('products')
+        ->middleware('auth.admin')->group(function () {
         Route::get('create', 'create')->name('create');
     });
-
 });
 
-Route::controller(\App\Http\Controllers\CategoryController::class)->name('category.')->prefix('categories')->group(function () {
+Route::controller(\App\Http\Controllers\CategoryController::class)
+    ->name('category.')
+    ->middleware('auth.admin')
+    ->prefix('categories')->group(function () {
    Route::get('create', 'create')->name('create');
    Route::post('', 'store');
    Route::get('{categoryId}/edit', 'edit')->name('edit');
+   Route::put('{categoryId}', 'update');
    Route::delete('{categoryId}', 'delete');
 });
 
-Route::controller(AuthController::class)->prefix('auth')->name('auth.')->group(function () {
+Route::controller(AuthController::class)
+    ->prefix('auth')
+    ->name('auth.')->group(function () {
     Route::get('login', 'signIn')->name('sign-in');
     Route::get('sign-up', 'registration')->name('registration');
     Route::post('sign-up', 'signUp');
     Route::post('login', 'login');
+
+    Route::post('exit', 'exit')->middleware('auth');
 });
