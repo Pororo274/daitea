@@ -24,16 +24,18 @@
             @endforeach
         </div>
         <div class="grid grid-cols-4 gap-6 mt-6">
-            @foreach($products as $product)
-                <div class="rounded-lg border border-gray-400 p-6">
+            @forelse($products as $product)
+                <a class="block rounded-lg border border-gray-400 p-6" href="/products/{{ $product['id'] }}">
                     <figure class="overflow-hidden w-full h-[200px] rounded-lg">
                         <img src="http://localhost:8000/storage/{{ $product['image_path'] }}" alt="" class="object-cover w-full h-full">
                     </figure>
                     <h3 class="text-lg font-medium mt-4">{{ $product['name'] }}</h3>
                     <p class="font-medium text-2xl mt-4">{{ $product['price'] }} руб.</p>
-                </div>
-            @endforeach
+                </a>
+            @empty
+                <p>Нет товара брат</p>
 
+            @endforelse
         </div>
     </div>
 </section>

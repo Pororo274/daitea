@@ -47,4 +47,17 @@ class ProductController extends Controller
 
         return redirect()->route('product.index');
     }
+
+    public function show(int $productId)
+    {
+        $product = Product::query()->find($productId);
+
+        if (is_null($product)) {
+            abort(404);
+        }
+
+        return view('pages.products.product', [
+            'product' => $product
+        ]);
+    }
 }
