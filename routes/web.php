@@ -19,9 +19,12 @@ Route::controller(ProductController::class)
     ->name('product.')->group(function () {
         Route::prefix('products')
             ->middleware('auth.admin')->group(function () {
+                Route::get('create', 'create')->name('create');
+                Route::get('{productId}/edit', 'edit')->name('edit');
                 Route::get('{productId}', 'show')->name('show')->withoutMiddleware('auth.admin');
                 Route::post('', 'store');
-                Route::get('create', 'create')->name('create');
+                Route::put('{productId}', 'update');
+                Route::delete('{productId}', 'delete');
             });
 
         Route::get('/', 'index')->name('index');

@@ -12,4 +12,18 @@ class InputHelper
             ]);
         }
     }
+
+    public static function setOldsIfNotDefined(array $olds): void
+    {
+        $allowOlds = [];
+
+        foreach ($olds as $key => $value) {
+            if (!session()->hasOldInput($key)) {
+                $allowOlds[$key] = $value;
+    
+            }
+        }       
+
+        session()->flash('_old_input', $allowOlds);
+    }
 }
